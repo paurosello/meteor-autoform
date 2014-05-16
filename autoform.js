@@ -1324,6 +1324,14 @@ function getFormValues(template, formId, ss) {
       getAutoValues: false
     })
   };
+  
+      _.each(ss._firstLevelSchemaKeys, function init_empty_arrays(field) {
+        var a = ss._schema[field].type.toString()
+        if(a.indexOf("Array")>=0 && typeof result.updateDoc["$set"][field] === 'undefined'){
+            result.updateDoc["$set"][field] = [];
+        }
+    });
+    
   return result;
 }
 
