@@ -1324,14 +1324,14 @@ function getFormValues(template, formId, ss) {
       getAutoValues: false
     })
   };
-  
+
       _.each(ss._firstLevelSchemaKeys, function init_empty_arrays(field) {
         var a = ss._schema[field].type.toString()
         if(a.indexOf("Array")>=0 && typeof result.updateDoc["$set"][field] === 'undefined'){
             result.updateDoc["$set"][field] = [];
         }
     });
-    
+
   return result;
 }
 
@@ -1816,7 +1816,7 @@ function initArrayFieldCount(formId, name) {
   arrayFields[formId][name].deps = arrayFields[formId][name].deps || new Deps.Dependency;
   arrayFields[formId][name].removedCount = arrayFields[formId][name].removedCount || 0;
   if (typeof arrayFields[formId][name].count !== "number") {
-    arrayFields[formId][name].count = Math.max(1, range.minCount); //respect minCount from schema
+    arrayFields[formId][name].count = Math.max(0, range.minCount); //respect minCount from schema
     arrayFields[formId][name].deps.changed();
   }
 }
